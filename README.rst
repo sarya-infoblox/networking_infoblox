@@ -23,7 +23,7 @@ This release of the driver supports:
 * Support for GM and CP members and Cloud API
 * Flexible mapping of OpenStack entities to network view
 * Set EAs to populate the Cloud tab in the Infoblox UI
-* Support for Neutron Rocky release (release 13.0.0 of the Driver)
+* Support for Neutron Rocky release (release 14.0.0 of the Driver)
 * Authentication:
 
   - Support for keystone v3 configuration:
