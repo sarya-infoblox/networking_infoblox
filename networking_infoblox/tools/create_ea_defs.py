@@ -98,7 +98,7 @@ def get_credentias():
         print("privilege, just hit <ENTER> when prompted for user name.\n")
         print("Otherwise, please enter user name and password of a user that "
               "has superuser privilege.\n")
-        username = raw_input("Enter user name: ")
+        username = input("Enter user name: ")
         if len(username) > 0:
             password = getpass.getpass("Enter password: ")
             credentials = {'username': username, 'password': password}
@@ -108,7 +108,7 @@ def get_credentias():
 
 def create_ea_defs(grid_id):
     print("\nCreating EA definitions...")
-    print("-" * PRINT_LINE)
+    print(("-" * PRINT_LINE))
     print("")
 
     credentials = get_credentias()
@@ -123,8 +123,8 @@ def create_ea_defs(grid_id):
     ea_defs_created = mgr.create_required_ea_definitions(
         const.REQUIRED_EA_DEFS, reraise=True)
     if ea_defs_created:
-        print("The following EA Definitions have been created: '%s'" %
-              [ea_def['name'] for ea_def in ea_defs_created])
+        print(("The following EA Definitions have been created: '%s'" %
+              [ea_def['name'] for ea_def in ea_defs_created]))
     else:
         print("All the EAs has been already created.")
     print("\n")
@@ -139,19 +139,19 @@ def create_ea_defs(grid_id):
         exit(1)
 
     print("Adding grid configuration EAs to the grid master...")
-    print("-" * PRINT_LINE)
+    print(("-" * PRINT_LINE))
     print("")
     ea_set = {}
     if member.extattrs is None:
         member.extattrs = objects.EA({})
-    for ea, val in const.GRID_CONFIG_DEFAULTS.items():
+    for ea, val in list(const.GRID_CONFIG_DEFAULTS.items()):
         if (member.extattrs.get(ea) is None and
                 not (val is None or val == [])):
             ea_set[ea] = val
             member.extattrs.set(ea, val)
 
     if ea_set:
-        print("Grid configurations: '%s'" % ea_set)
+        print(("Grid configurations: '%s'" % ea_set))
         member.update()
     else:
         print("All the grid configurations have been already added.")
@@ -160,7 +160,7 @@ def create_ea_defs(grid_id):
 
 def participate_network_views(grid_id):
     print("Associating/Unassociating network views for OpenStack...")
-    print("-" * PRINT_LINE)
+    print(("-" * PRINT_LINE))
     print("")
 
     netview_input = None
@@ -178,7 +178,7 @@ def participate_network_views(grid_id):
         return
 
     netview_names = [ib_netview.name for ib_netview in ib_netviews]
-    print("Found %s network views from the grid.\n" % len(netview_names))
+    print(("Found %s network views from the grid.\n" % len(netview_names)))
 
     operation = 'ASSOCIATION'
     if not netview_input and not cfg.CONF.script:
@@ -193,10 +193,10 @@ def participate_network_views(grid_id):
         question = "Do you want to list network views?"
         choice = ask_question(question, expected_answers_yes_no)
         if choice == 'y':
-            print(', '.join(netview_names))
+            print((', '.join(netview_names)))
             print("")
         question = "Please provide a comma separated list of network views: "
-        netview_input = raw_input(question)
+        netview_input = input(question)
 
     if (not netview_input or
             not isinstance(netview_input, six.string_types)):
@@ -219,7 +219,7 @@ def participate_network_views(grid_id):
         ib_netview_found = [ib_net for ib_net in ib_netviews
                             if ib_net.name == nv]
         if not ib_netview_found:
-            print("'%s' is not found." % nv)
+            print(("'%s' is not found." % nv))
             continue
 
         ib_netview = ib_netview_found[0]
@@ -237,7 +237,7 @@ def participate_network_views(grid_id):
                     found_ids = [id for id in cloud_adapter_ids
                                  if id == grid_id_str]
                     if found_ids:
-                        print("'%s' already associated." % nv)
+                        print(("'%s' already associated." % nv))
                         continue
 
                     cloud_adapter_ids.append(grid_id_str)
@@ -250,15 +250,15 @@ def participate_network_views(grid_id):
                 ib_netview.update()
             except ib_ex.InfobloxCannotUpdateObject as e:
                 if 'Write permission' in e.msg:
-                    print("'%s' has no write permission." % nv)
+                    print(("'%s' has no write permission." % nv))
                     continue
                 else:
-                    print("'%s' failed to associate: %s" % (nv, e.msg))
+                    print(("'%s' failed to associate: %s" % (nv, e.msg)))
                     continue
-            print("'%s' is now associated." % nv)
+            print(("'%s' is now associated." % nv))
         else:
             if ib_netview.extattrs is None:
-                print("'%s' not associated." % nv)
+                print(("'%s' not associated." % nv))
                 continue
 
             cloud_adapter_ids = ib_netview.extattrs.get(
@@ -277,17 +277,17 @@ def participate_network_views(grid_id):
                         ib_netview.update()
                     except ib_ex.InfobloxCannotUpdateObject as e:
                         if 'Write permission' in e.msg:
-                            print("'%s' has no write permission." % nv)
+                            print(("'%s' has no write permission." % nv))
                             continue
                         else:
-                            print("'%s' failed to unassociated: %s" %
-                                  (nv, e.msg))
+                            print(("'%s' failed to unassociated: %s" %
+                                  (nv, e.msg)))
                             continue
-                    print("'%s' is now unassociated." % nv)
+                    print(("'%s' is now unassociated." % nv))
                 else:
-                    print("'%s' not associated." % nv)
+                    print(("'%s' not associated." % nv))
             else:
-                print("'%s' not associated." % nv)
+                print(("'%s' not associated." % nv))
 
     print("\n")
 
@@ -297,7 +297,7 @@ def ask_question(question, expected_answers):
     prompt_choice = " or ".join(prompt_choice)
 
     while True:
-        choice = raw_input("%s Enter %s: " % (question, prompt_choice))
+        choice = input("%s Enter %s: " % (question, prompt_choice))
         if choice not in expected_answers:
             print("Enter a valid choice. Please try again.\n")
             continue

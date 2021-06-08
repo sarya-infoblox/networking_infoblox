@@ -299,7 +299,7 @@ class GridConfiguration(object):
         return config[0] if config and config[0].get('extattrs') else None
 
     def _set_default_values(self):
-        for prop, key in self.property_to_ea_mapping.items():
+        for prop, key in list(self.property_to_ea_mapping.items()):
             if key in const.GRID_CONFIG_DEFAULTS:
                 setattr(self, prop, const.GRID_CONFIG_DEFAULTS[key])
 

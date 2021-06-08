@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import mock
+import unittest.mock as mock
 
 from neutron.tests.unit import testlib_api
 from neutron_lib import context
@@ -229,6 +229,7 @@ class GridTestCase(base.TestCase, testlib_api.SqlTestCase):
 
     def test__set_default_values(self):
         # validate that default values are set as member properties
-        for prop, key in self.test_grid_config.property_to_ea_mapping.items():
+        for prop, key in list(
+                self.test_grid_config.property_to_ea_mapping.items()):
             self.assertEqual(const.GRID_CONFIG_DEFAULTS[key],
                              getattr(self.test_grid_config, prop))

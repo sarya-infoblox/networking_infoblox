@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import mock
+import unittest.mock as mock
 
 from infoblox_client import objects as ib_objects
 
@@ -187,15 +187,15 @@ class TestIpamEventHandler(base.TestCase):
             self.plugin.get_subnet.assert_not_called()
 
     def _prepare_context(self):
-        message_context = {'project_name': u'admin',
-                           'user_id': u'9510723b6555473cb735ce6640e680cb',
+        message_context = {'project_name': 'admin',
+                           'user_id': '9510723b6555473cb735ce6640e680cb',
                            'show_deleted': False,
-                           'roles': [u'admin'],
-                           'tenant_name': u'admin',
-                           'auth_token': u'dd7257d2e02f41c2908ffdc197af9061',
-                           'tenant_id': u'bf0806763e32436bbdb8fd9b6ebfac93',
-                           'tenant': u'bf0806763e32436bbdb8fd9b6ebfac93',
-                           'user_name': u'admin'}
+                           'roles': ['admin'],
+                           'tenant_name': 'admin',
+                           'auth_token': 'dd7257d2e02f41c2908ffdc197af9061',
+                           'tenant_id': 'bf0806763e32436bbdb8fd9b6ebfac93',
+                           'tenant': 'bf0806763e32436bbdb8fd9b6ebfac93',
+                           'user_name': 'admin'}
         self.ipam_handler.ctxt = message_context
 
     def test_create_network_sync_same_tenant(self):
