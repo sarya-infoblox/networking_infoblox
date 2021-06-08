@@ -83,7 +83,7 @@ class NotificationService(service.Service):
         super(NotificationService, self).__init__()
         self.report_thread = None
         self.event_listener = None
-        self.executor = "blocking"
+        self.executor = "threading"
         if report_interval:
             self.report_interval = report_interval
         else:
@@ -185,7 +185,7 @@ class NotificationService(service.Service):
 
 def get_notification_listener(transport, targets, endpoints,
                               allow_requeue=False, pool=None,
-                              executor='blocking'):
+                              executor='threading'):
     """Return a configured oslo_messaging notification listener."""
     return oslo_messaging.get_notification_listener(
         transport, targets, endpoints, executor=executor,

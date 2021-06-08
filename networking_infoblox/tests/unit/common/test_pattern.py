@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import mock
+import unittest.mock as mock
 
 from neutron_lib import constants as n_const
 
@@ -107,7 +107,8 @@ class TestPatternBuilder(base.TestCase):
                                 external=True)
 
     def test_get_hostname_for_other_device_owners(self):
-        for dev, patt in const.NEUTRON_DEVICE_OWNER_TO_PATTERN_MAP.items():
+        for dev, patt in list(
+            const.NEUTRON_DEVICE_OWNER_TO_PATTERN_MAP.items()):
             expected_hostname = str.format(
                 "{}.{}", patt.replace('{ip_address}',
                                       self.expected_ip),
@@ -121,7 +122,8 @@ class TestPatternBuilder(base.TestCase):
             '{instance_name}')
         self.pattern_builder.grid_config.external_domain_name_pattern = (
             'external.infoblox.com')
-        for dev, patt in const.NEUTRON_DEVICE_OWNER_TO_PATTERN_MAP.items():
+        for dev, patt in list(
+            const.NEUTRON_DEVICE_OWNER_TO_PATTERN_MAP.items()):
             expected_hostname = str.format(
                 "{}.{}", patt.replace('{ip_address}',
                                       self.expected_ip),

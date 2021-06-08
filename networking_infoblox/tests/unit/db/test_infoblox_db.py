@@ -37,7 +37,7 @@ class InfobloxDbTestCase(testlib_api.SqlTestCase):
         self.grid_status = "ON"
 
     def _create_tenants(self, tenants):
-        for id, name in tenants.items():
+        for id, name in list(tenants.items()):
             infoblox_db.add_tenant(self.ctx.session, id, name)
 
     def test_add_and_get_tenant(self):
@@ -310,7 +310,7 @@ class InfobloxDbTestCase(testlib_api.SqlTestCase):
         db_network_views = infoblox_db.get_network_views(self.ctx.session)
         actual_rows = utils.get_values_from_records('network_view',
                                                     db_network_views)
-        self.assertEqual(netview_dict.keys(), actual_rows)
+        self.assertEqual(list(netview_dict.keys()), actual_rows)
 
         # test network view removals
         # - remove 'hs-view-1', 'hs-view-2'
@@ -870,7 +870,7 @@ class InfobloxDbTestCase(testlib_api.SqlTestCase):
         self.assertIsNone(m2m_dhcp_member)
 
     def _create_instances(self, instances):
-        for id, name in instances.items():
+        for id, name in list(instances.items()):
             infoblox_db.add_instance(self.ctx.session, id, name)
 
     def test_add_and_get_instance(self):
@@ -903,7 +903,7 @@ class InfobloxDbTestCase(testlib_api.SqlTestCase):
         self.assertEqual('instance-name2', instance.instance_name)
 
     def _create_networks(self, networks):
-        for id, name in networks.items():
+        for id, name in list(networks.items()):
             infoblox_db.add_network(self.ctx.session, id, name)
 
     def test_add_and_get_network(self):

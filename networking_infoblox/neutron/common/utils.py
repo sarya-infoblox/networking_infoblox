@@ -1,4 +1,4 @@
-# Copyright 2015 Infoblox Inc.
+# Copyright 2021 Infoblox Inc.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -20,7 +20,10 @@ import netaddr
 import re
 import six
 import time
-import urllib
+
+import urllib.error
+import urllib.parse
+import urllib.request
 
 from oslo_serialization import jsonutils
 
@@ -322,10 +325,11 @@ def find_in_list_by_value(search_value, search_list,
         return None
 
     if isinstance(search_list[0], dict):
-        found_list = [m for m in search_list if search_value in m.values()]
+        found_list = [m for m in search_list if search_value in list(
+            m.values())]
     else:
         found_list = [m for m in search_list
-                      if search_value in m.__dict__.values()]
+                      if search_value in list(m.__dict__.values())]
 
     if first_occurrence_only:
         return found_list[0] if found_list else None
@@ -371,7 +375,7 @@ def get_hash(text=None):
     if text and isinstance(text, six.string_types):
         text = text.encode('utf-8')
         return hashlib.md5(text).hexdigest()
-    return hashlib.md5(str(time.time())).hexdigest()
+    return hashlib.md5(str(time.time()).encode('utf-8')).hexdigest()
 
 
 def get_oid_from_nios_ref(obj_ref):
@@ -396,7 +400,7 @@ def get_network_info_from_nios_ref(network_ref):
         if match:
             cidr = match.group(3) + '/' + match.group(4)
             if match.group(1) == 'ipv6network':
-                cidr = urllib.unquote(cidr)
+                cidr = urllib.parse.unquote(cidr)
             return {'object_id': match.group(2),
                     'network_view': match.group(5),
                     'cidr': cidr}
@@ -493,7 +497,7 @@ def get_ipv4_network_prefix(cidr, subnet_name):
         if subnet_name and len(subnet_name) > 0:
             prefix = subnet_name
         else:
-            prefix = '-'.join(filter(None, re.split(r'[.:/]', cidr)))
+            prefix = '-'.join([_f for _f in re.split(r'[.:/]', cidr) if _f])
     return prefix
 
 

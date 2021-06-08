@@ -16,7 +16,7 @@
 import eventlet
 eventlet.monkey_patch()
 
-import mock
+import unittest.mock as mock
 
 from neutron.tests.unit import testlib_api
 from neutron_lib import context

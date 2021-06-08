@@ -13,7 +13,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import mock
+import unittest.mock as mock
+
 from neutron_lib import constants as n_const
 
 from infoblox_client import objects as ib_objects
@@ -137,7 +138,7 @@ class EaManagerTestCase(base.TestCase):
                    'Cloud API Owned': str(False)}
         ea = ea_manager.get_ea_for_network(self.user_id, self.tenant_id,
                                            self.tenant_name, network, subnet)
-        for key, value in mapping.items():
+        for key, value in list(mapping.items()):
             self.assertEqual(mapping[key], ea.get(key))
 
     def test_get_ea_for_range(self):
@@ -163,7 +164,7 @@ class EaManagerTestCase(base.TestCase):
                        'VM ID': None}
         ea = ea_manager.get_default_ea_for_ip(self.user_id, self.tenant_id,
                                               self.tenant_name)
-        for key, value in expected_ea.items():
+        for key, value in list(expected_ea.items()):
             self.assertEqual(value, ea.get(key))
 
     def test_get_ea_for_ip(self):
@@ -185,7 +186,7 @@ class EaManagerTestCase(base.TestCase):
         ea = ea_manager.get_ea_for_ip(self.user_id, self.tenant_id,
                                       self.tenant_name, network,
                                       port_id, device_id, device_owner)
-        for key, value in expected_ea.items():
+        for key, value in list(expected_ea.items()):
             self.assertEqual(value, ea.get(key))
 
     def test_get_ea_for_ip_with_router_gateway_ip(self):
@@ -207,7 +208,7 @@ class EaManagerTestCase(base.TestCase):
         ea = ea_manager.get_ea_for_ip(self.user_id, self.tenant_id,
                                       self.tenant_name, network,
                                       port_id, device_id, device_owner)
-        for key, value in expected_ea.items():
+        for key, value in list(expected_ea.items()):
             self.assertEqual(value, ea.get(key))
 
     def test_get_ea_for_ip_with_floatingip_creation(self):
@@ -229,7 +230,7 @@ class EaManagerTestCase(base.TestCase):
         ea = ea_manager.get_ea_for_ip(self.user_id, self.tenant_id,
                                       self.tenant_name, network, port_id,
                                       device_id, device_owner)
-        for key, value in expected_ea.items():
+        for key, value in list(expected_ea.items()):
             self.assertEqual(value, ea.get(key))
 
     def test_get_ea_for_ip_with_floatingip_association(self):
@@ -253,7 +254,7 @@ class EaManagerTestCase(base.TestCase):
                                       self.tenant_name,
                                       network, port_id, device_id,
                                       device_owner, is_floating_ip)
-        for key, value in expected_ea.items():
+        for key, value in list(expected_ea.items()):
             self.assertEqual(value, ea.get(key))
 
     def test_get_ea_for_ip_with_floatingip_dissociation(self):
@@ -276,7 +277,7 @@ class EaManagerTestCase(base.TestCase):
                                       self.tenant_name,
                                       network, port_id, device_id,
                                       device_owner)
-        for key, value in expected_ea.items():
+        for key, value in list(expected_ea.items()):
             self.assertEqual(value, ea.get(key))
 
     def test_get_ea_for_zones_without_net(self):
@@ -344,7 +345,7 @@ class EaManagerTestCase(base.TestCase):
         ea = ea_manager.get_ea_for_forward_zone(self.user_id, self.tenant_id,
                                                 self.tenant_name, network,
                                                 subnet, template)
-        expected_ea = {key: value for key, value in verified_ea.items()
+        expected_ea = {key: value for key, value in list(verified_ea.items())
                        if key not in skip_eas}
         self.assertEqual(expected_ea, ea.ea_dict)
 

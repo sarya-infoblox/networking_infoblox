@@ -108,7 +108,7 @@ def update_tenant_mapping(context, networks, tenant_id,
 
 
 def _get_unknown_ids_from_dict(tenant_ids):
-    return [id for id, unknown in tenant_ids.items()
+    return [id for id, unknown in list(tenant_ids.items())
             if unknown is True]
 
 

@@ -615,7 +615,7 @@ class InfobloxContext(object):
         # find mapping matches on common cases
         mapping_filters = self._get_mapping_filters(mapping_attrs)
         for mf in mapping_filters:
-            if mf.values()[0] is None:
+            if list(mf.values())[0] is None:
                 continue
             matches = utils.find_in_list_by_condition(
                 mf, self.discovered_mapping_conditions)

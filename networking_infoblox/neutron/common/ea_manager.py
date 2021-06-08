@@ -102,7 +102,7 @@ def reset_ea_for_network(ib_network):
 
     eas = ib_network.extattrs
     ea_dict = eas.to_dict()
-    map(lambda ea: ea_dict.pop(ea, None), const.NETWORK_EA_LIST)
+    list(map(lambda ea: ea_dict.pop(ea, None), const.NETWORK_EA_LIST))
     ib_network.extattrs = ib_objects.EA.from_dict(ea_dict)
 
 
@@ -119,7 +119,7 @@ def reset_ea_for_range(ib_range):
 
     eas = ib_range.extattrs
     ea_dict = eas.to_dict()
-    map(lambda ea: ea_dict.pop(ea, None), const.RANGE_EA_LIST)
+    list(map(lambda ea: ea_dict.pop(ea, None), const.RANGE_EA_LIST))
     ib_range.extattrs = ib_objects.EA.from_dict(ea_dict)
 
 
@@ -182,7 +182,7 @@ def reset_ea_for_zone(ib_zone):
 
     eas = ib_zone.extattrs
     ea_dict = eas.to_dict()
-    map(lambda ea: ea_dict.pop(ea, None), const.ZONE_EA_LIST)
+    list(map(lambda ea: ea_dict.pop(ea, None), const.ZONE_EA_LIST))
     ib_zone.extattrs = ib_objects.EA.from_dict(ea_dict)
 
 
