@@ -4,7 +4,6 @@ networking-infoblox
 
 Contains Neutron drivers for integration with Infoblox grids for IPAM and DNS.
 
-
 * Free software: Apache license
 * Source: http://git.openstack.org/cgit/openstack/networking-infoblox
 * Bugs: http://bugs.launchpad.net/networking-infoblox
@@ -35,6 +34,7 @@ This release of the driver supports:
   - Support for keystone SSL configuration
 
 * Dropped support for OpenStack Pike
+* Supported versions: Wallaby, Rocky, Queens
 
 Overview
 --------
