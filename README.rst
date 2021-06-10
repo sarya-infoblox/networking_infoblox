@@ -62,7 +62,7 @@ not directly part of the IPAM function.
 Installation and Configuration
 ------------------------------
 
-See the documentation link above for details on Installation and Configuration.
+See the documentation link above for details on Installation and Configuration or check doc/source/...
 
 Known issues
 ------------

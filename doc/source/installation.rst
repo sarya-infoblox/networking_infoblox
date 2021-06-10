@@ -136,37 +136,6 @@ the minimum set of required permissions.
      - RW
      -
 
-Create Extensible Attribute Definitions and Network View Associations
-----------------------------------------------------------------------
-The driver uses a variety of Extensible Attributes (EAs) to manage its
-configuration. The needed extensible attributes may be created automatically
-using the ``create_ea_defs.py`` script that can be found under the ``tools``
-directory in the distribution::
-
-    $ python create_ea_defs.py
-
-The script will prompt you for the user name and password of an Infoblox superuser, which
-is needed to create the EA definitions.
-
-The script will also prompt you for association or un-association of
-network views to OpenStack. This is an important step. You can use this script to select
-network views explicitly to use in OpenStack. An associated network view will
-have `Cloud Adapter ID` EAs stored on that network view. The `Cloud Adapter ID`
-is equivalent to `cloud_data_center_id` defined in neutron.conf.
-
-Setting EA values to Configure the Integration
-----------------------------------------------
-You must decide on the configuration you would like to use. For details on the
-configuration options, please refer to the Infoblox Configuration Guide
-(configuration_guide.rst).
-
-The configuration is captured within the various EAs that were created in the
-previous step. In general, these EAs are set on the *grid master* member. To do
-this, you navigate to Grid > Grid Manager > Members and click on the Gear icon
-next to the grid master member. Choose the *Extensible Attributes* option. From
-there you can create and modify various EA values that will apply to the entire
-IPAM driver integration.
-
 Installing the Driver
 =====================
 The driver need to be installed on each controller node that is running the
@@ -191,15 +160,15 @@ To install the most recent production release, use the following command::
     $ sudo pip install networking-infoblox
 
 .. note::
-  Release 8.0.1 of the IPAM Driver supports the Mitaka release,
-  9.0.1 supports the Newton release, and 10.0.0 supports the Ocata release.
+  Release 18.0.0 of the IPAM Driver supports the Wallaby release,
+  14.0.0 supports the Rocky release, and 12.0.1 supports the Queens release.
 
-  For example, to install the IPAM Driver for Newton, use the following command:
+  For example, to install the IPAM Driver for Wallaby, use the following command:
 
-    $ sudo pip install networking-Infoblox==9.0.1
+    $ sudo pip install networking-Infoblox==18.0.0
 
 .. note::
-  Infoblox strongly recommends using 8.0.1, 9.0.1, 10.0.0 and later versions of the
+  Infoblox strongly recommends using 18.0.0, 14.0.0, 12.0.1 versions of the
   IPAM Driver as they include critical bug fixes.
 
 Creating the Infoblox Neutron Database
@@ -412,17 +381,6 @@ and extensible attribute values for VMs. Set the following values in
    notification_topics = notifications
    notify_on_state_change = vm_state
 
-Start the Infoblox IPAM Agent
-=============================
-Depending on your distribution, you will need to create and configure
-init.d and/or systemd service definitions for the ``infoblox-ipam-agent``.
-Once that is done, you should start the agent.
-
-To start it manually, without any init.d or systemd setup, you run the
-following command as the same user that runs neutron-server::
-
-    $ /usr/local/bin/infoblox-ipam-agent --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini >/var/log/neutron/infoblox-ipam-agent.log 2>&1
-
 Restart the Services
 ====================
 The appropriate services must be restarted to pick up the changes to the
@@ -433,7 +391,7 @@ Neutron
 Restart ``neutron-server`` on each node running it. The exact command may vary
 based upon your distribution. In Ubuntu the command is::
 
-    $ sudo service neutron-server restart
+    $ sudo systemctl restart devstack@n-*
 
 Nova
 ----
@@ -441,7 +399,49 @@ If you modified the Nova notification settings, you must restart the Nova
 Compute service on each node running it. The exact command may vary based
 on your distribution. In Ubuntu the command is::
 
-    $ sudo service nova-compute restart
+    $ sudo systemctl restart devstack@q-*
+
+Create Extensible Attribute Definitions and Network View Associations
+----------------------------------------------------------------------
+The driver uses a variety of Extensible Attributes (EAs) to manage its
+configuration. The needed extensible attributes may be created automatically
+using the ``create_ea_defs.py`` script that can be found under the ``tools``
+directory in the distribution::
+
+    $ python create_ea_defs.py
+
+The script will prompt you for the user name and password of an Infoblox superuser, which
+is needed to create the EA definitions.
+
+The script will also prompt you for association or un-association of
+network views to OpenStack. This is an important step. You can use this script to select
+network views explicitly to use in OpenStack. An associated network view will
+have `Cloud Adapter ID` EAs stored on that network view. The `Cloud Adapter ID`
+is equivalent to `cloud_data_center_id` defined in neutron.conf.
+
+Setting EA values to Configure the Integration
+----------------------------------------------
+You must decide on the configuration you would like to use. For details on the
+configuration options, please refer to the Infoblox Configuration Guide
+(configuration_guide.rst).
+
+The configuration is captured within the various EAs that were created in the
+previous step. In general, these EAs are set on the *grid master* member. To do
+this, you navigate to Grid > Grid Manager > Members and click on the Gear icon
+next to the grid master member. Choose the *Extensible Attributes* option. From
+there you can create and modify various EA values that will apply to the entire
+IPAM driver integration.
+
+Start the Infoblox IPAM Agent
+=============================
+Depending on your distribution, you will need to create and configure
+init.d and/or systemd service definitions for the ``infoblox-ipam-agent``.
+Once that is done, you should start the agent.
+
+To start it manually, without any init.d or systemd setup, you run the
+following command as the same user that runs neutron-server::
+
+    $ /usr/local/bin/infoblox-ipam-agent --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini >/var/log/neutron/infoblox-ipam-agent.log 2>&1
 
 Running Data Migration
 ======================
@@ -505,17 +505,6 @@ For keystone behind TLS:
     $ networking-infoblox(keystone_admin)]# python networking_infoblox/tools/sync_neutron_to_infoblox.py
 
 You can re-run the migration script as many times as needed.
-
-Upgrading Infoblox IPAM Driver for OpenStack Neutron
-====================================================
-
-To upgrade the Driver from version 8.0.0 to 8.0.1, use the following command::
-
-    $ sudo pip install networking-infoblox==8.0.1
-
-To upgrade the Driver from version 9.0.0 to 9.0.1, use the following command::
-
-    $ sudo pip install networking-infoblox==9.0.1
 
 Known Issues and Limitation
 ===========================
