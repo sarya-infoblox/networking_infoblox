@@ -38,7 +38,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'networking-infoblox'
-copyright = '2015, Infoblox Inc.'
+copyright = '2021, Infoblox Inc.'
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
 add_function_parentheses = True
