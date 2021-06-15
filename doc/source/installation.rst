@@ -140,24 +140,24 @@ Installing the Driver
 =====================
 The driver need to be installed on each controller node that is running the
 Neutron service. The driver is available from PyPi, and can be installed using
-the ``pip install`` command.
+the ``pip3 install`` command.
 
 Infoblox IPAM Agent Installation
 --------------------------------
 The ``infoblox-ipam-agent`` init script that is used to start the Infoblox IPAM
-Agent will be installed as part of the ``pip install`` command.
+Agent will be installed as part of the ``pip3 install`` command.
 By default, the ``infoblox-ipam-agent`` init script is installed as
 ``/usr/local/etc/init.d/infoblox-ipam-agent``. To install the script in ``/etc/init.d``,
 specify ``--install-option`` as follow::
 
-    $ sudo pip install --install-option="--install-data=/" networking-infoblox
+    $ sudo pip3 install --install-option="--install-data=/" networking-infoblox
 
 
 Latest Release
 --------------
 To install the most recent production release, use the following command::
 
-    $ sudo pip install networking-infoblox
+    $ sudo pip3 install networking-infoblox
 
 .. note::
   Release 18.0.0 of the IPAM Driver supports the Wallaby release,
@@ -165,7 +165,7 @@ To install the most recent production release, use the following command::
 
   For example, to install the IPAM Driver for Wallaby, use the following command:
 
-    $ sudo pip install networking-Infoblox==18.0.0
+    $ sudo pip3 install networking-Infoblox==18.0.0
 
 .. note::
   Infoblox strongly recommends using 18.0.0, 14.0.0, 12.0.1 versions of the
@@ -408,7 +408,7 @@ configuration. The needed extensible attributes may be created automatically
 using the ``create_ea_defs.py`` script that can be found under the ``tools``
 directory in the distribution::
 
-    $ python create_ea_defs.py
+    $ python3 create_ea_defs.py
 
 The script will prompt you for the user name and password of an Infoblox superuser, which
 is needed to create the EA definitions.
@@ -500,9 +500,9 @@ For keystone behind TLS:
 
     # if you have not run infoblox-ipam-agent yet, then you need to run
     # infoblox_grid_sync.py to register the Infoblox grid members to Neutron.
-    $ networking-infoblox(keystone_admin)]# python networking_infoblox/tools/infoblox_grid_sync.py
+    $ networking-infoblox(keystone_admin)]# python3 networking_infoblox/tools/infoblox_grid_sync.py
 
-    $ networking-infoblox(keystone_admin)]# python networking_infoblox/tools/sync_neutron_to_infoblox.py
+    $ networking-infoblox(keystone_admin)]# python3 networking_infoblox/tools/sync_neutron_to_infoblox.py
 
 You can re-run the migration script as many times as needed.
 
