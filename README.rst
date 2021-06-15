@@ -8,6 +8,7 @@ Contains Neutron drivers for integration with Infoblox grids for IPAM and DNS.
 * Source: http://git.openstack.org/cgit/openstack/networking-infoblox
 * Bugs: http://bugs.launchpad.net/networking-infoblox
 * Installation: https://opendev.org/x/networking-infoblox/src/branch/master/doc/source/installation.rst
+  (Please use python 3.6 to avoid issues with package version conflicts)
 * Configuration Guide: https://opendev.org/x/networking-infoblox/src/branch/master/doc/source/configuration_guide.rst
 
 Features
