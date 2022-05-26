@@ -8,7 +8,7 @@ Contains Neutron drivers for integration with Infoblox grids for IPAM and DNS.
 * Source: http://git.openstack.org/cgit/openstack/networking-infoblox
 * Bugs: http://bugs.launchpad.net/networking-infoblox
 * Installation: https://opendev.org/x/networking-infoblox/src/branch/master/doc/source/installation.rst
-  (Please use python 3.6 to avoid issues with package version conflicts)
+  (Please use python 3.8 to avoid issues with package version conflicts)
 * Configuration Guide: https://opendev.org/x/networking-infoblox/src/branch/master/doc/source/configuration_guide.rst
 
 Features
@@ -24,7 +24,7 @@ This release of the driver supports:
 * Support for GM and CP members and Cloud API
 * Flexible mapping of OpenStack entities to network view
 * Set EAs to populate the Cloud tab in the Infoblox UI
-* Support for Neutron Wallaby release (release 18.0.0 of the Driver)
+* Support for Neutron Xena release (release 19.0.0 of the Driver)
 * Authentication:
 
   - Support for keystone v3 configuration:
@@ -34,8 +34,8 @@ This release of the driver supports:
 
   - Support for keystone SSL configuration
 
-* Dropped support for OpenStack Pike
-* Supported versions: Wallaby, Rocky, Queens
+* Dropped support for OpenStack Queens, Rocky
+* Supported versions: Xena, Wallaby
 
 Overview
 --------

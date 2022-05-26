@@ -211,15 +211,14 @@ class IpamSyncController(object):
 
     def _register_mapping_member(self):
         session = self.ib_cxt.context.session
-        mapping_relation = utils.get_mapping_relation(
-            self.ib_cxt.mapping.authority_member.member_type)
         mapping_members = dbi.get_mapping_members(
             session,
             self.ib_cxt.mapping.network_view_id,
             self.ib_cxt.mapping.authority_member.member_id,
-            self.grid_id,
-            mapping_relation)
+            self.grid_id)
         if not mapping_members:
+            mapping_relation = utils.get_mapping_relation(
+                self.ib_cxt.mapping.authority_member.member_type)
             dbi.add_mapping_member(
                 session,
                 self.ib_cxt.mapping.network_view_id,

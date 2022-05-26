@@ -160,15 +160,14 @@ To install the most recent production release, use the following command::
     $ sudo pip3 install networking-infoblox
 
 .. note::
-  Release 18.0.0 of the IPAM Driver supports the Wallaby release,
-  14.0.0 supports the Rocky release, and 12.0.1 supports the Queens release.
+  Release 19.0.0 of the IPAM Driver supports the xena release, 18.0.0 of the IPAM Driver supports the Wallaby release.
 
   For example, to install the IPAM Driver for Wallaby, use the following command:
 
-    $ sudo pip3 install networking-Infoblox==18.0.0
+    $ sudo pip3 install networking-Infoblox==19.0.0
 
 .. note::
-  Infoblox strongly recommends using 18.0.0, 14.0.0, 12.0.1 versions of the
+  Infoblox strongly recommends using 19.0.0, 18.0.0 versions of the
   IPAM Driver as they include critical bug fixes.
 
 Creating the Infoblox Neutron Database
@@ -298,7 +297,7 @@ Keystone configuration for TLS Support add:
    * - admin_password
      - The password to use for the WAPI.
    * - wapi_version
-     - The WAPI version to use. WAPI Version 2.3 or later is supported.
+     - The WAPI version to use. WAPI Version 2.11 or later is supported.
        (NIOS version 7.3.x or later is supported)
    * - wapi_max_results
      - The maximum number of objects to be returned by WAPI. If this is set to
@@ -354,7 +353,7 @@ installation):
    grid_master_name = GRID_MASTER_NAME
    admin_user_name = USER
    admin_password = PASSWORD
-   wapi_version = 2.3
+   wapi_version = 2.11
    wapi_max_results = -50000
    wapi_paging = True
 
@@ -391,7 +390,7 @@ Neutron
 Restart ``neutron-server`` on each node running it. The exact command may vary
 based upon your distribution. In Ubuntu the command is::
 
-    $ sudo systemctl restart devstack@n-*
+    $ sudo systemctl restart devstack@q-*
 
 Nova
 ----
@@ -399,7 +398,7 @@ If you modified the Nova notification settings, you must restart the Nova
 Compute service on each node running it. The exact command may vary based
 on your distribution. In Ubuntu the command is::
 
-    $ sudo systemctl restart devstack@q-*
+    $ sudo systemctl restart devstack@n-*
 
 Create Extensible Attribute Definitions and Network View Associations
 ----------------------------------------------------------------------
@@ -478,7 +477,7 @@ For keystone behind TLS:
     unset OS_SERVICE_TOKEN
     export OS_USERNAME=admin
     export OS_PASSWORD=mysecret
-    export OS_AUTH_URL=https://controller:5000/v3
+    export OS_AUTH_URL=http://controller:5000/v3
     export PS1='[\u@\h \W(keystone_admin)]\$ '
 
     export OS_TENANT_NAME=admin
@@ -487,7 +486,7 @@ For keystone behind TLS:
     export OS_PROJECT_DOMAIN_ID=default
     export OS_USER_DOMAIN_ID=default
     export OS_DOMAIN_ID=default
-    export SERVICE_ENDPOINT=https://controller:5000/v3
+    export SERVICE_ENDPOINT=http://controller:5000/v3
     export OS_IDENTITY_API_VERSION=3
     export OS_CACERT=/etc/ssl/certs/apache-selfsigned.crt
     export OS_INSECURE=False

@@ -45,7 +45,6 @@ ipam_opts = [
 
 ]
 
-
 data_center_opts = [
     cfg.StrOpt('data_center_name',
                default='',
@@ -113,7 +112,6 @@ def register_infoblox_grid_opts(conf, data_center_id):
         name=data_center,
         title="Configuration for Infoblox data center %s" % data_center_id))
     conf.register_opts(data_center_opts, group=data_center)
-
 
 def get_infoblox_grid_opts(data_center_id):
     grid_info = dict()

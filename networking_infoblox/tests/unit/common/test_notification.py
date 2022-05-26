@@ -22,6 +22,8 @@ import time
 
 from neutron.tests.unit import testlib_api
 from neutron_lib import context
+from neutron.conf.agent import common as agent_conf
+from oslo_config import cfg
 
 from networking_infoblox.neutron.common import grid
 from networking_infoblox.neutron.common import notification
@@ -84,6 +86,9 @@ class NotificationTestCase(testlib_api.BaseSqlTestCase, base.RpcTestCase):
     @mock.patch.object(notification, 'NotificationEndpoint', mock.Mock())
     @mock.patch.object(grid, 'GridManager', mock.Mock())
     def test_notification_service(self):
+        # Register default agent configuration options
+        # which will be used by notification.NotificationService
+        agent_conf.register_agent_state_opts_helper(cfg.CONF)
         publisher_id = 'test_publisher'
         topics = ['notifications']
         notifier = self.get_notifier(topics=topics, publisher_id=publisher_id)
