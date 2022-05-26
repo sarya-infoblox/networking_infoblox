@@ -1,4 +1,11 @@
 - project:
     templates:
-      - openstack-python36-jobs-neutron
       - publish-to-pypi
+    check:
+        jobs:
+          - openstack-tox-py38
+          - openstack-tox-pep8
+    gate:
+      jobs:
+        - openstack-tox-pep8
+        - openstack-tox-py38
