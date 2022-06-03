@@ -160,8 +160,7 @@ To install the most recent production release, use the following command::
     $ sudo pip3 install networking-infoblox
 
 .. note::
-  Release 19.0.0 of the IPAM Driver supports the xena release, 18.0.0 of the IPAM Driver supports the Wallaby release,
-  14.0.0 supports the Rocky release, and 12.0.1 supports the Queens release.
+  Release 19.0.0 of the IPAM Driver supports the xena release, 18.0.0 of the IPAM Driver supports the Wallaby release.
 
   For example, to install the IPAM Driver for Wallaby, use the following command:
 

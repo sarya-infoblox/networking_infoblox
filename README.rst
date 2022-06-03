@@ -36,7 +36,7 @@ This release of the driver supports:
   - Support for keystone SSL configuration
 
 * Dropped support for OpenStack Pike
-* Supported versions: Xena, Wallaby, Rocky, Queens
+* Supported versions: Xena, Wallaby
 
 Overview
 --------
