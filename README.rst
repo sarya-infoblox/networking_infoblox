@@ -24,7 +24,6 @@ This release of the driver supports:
 * Support for GM and CP members and Cloud API
 * Flexible mapping of OpenStack entities to network view
 * Set EAs to populate the Cloud tab in the Infoblox UI
-* Support for Neutron Wallaby release (release 18.0.0 of the Driver)
 * Support for Neutron Xena release (release 19.0.0 of the Driver)
 * Authentication:
 

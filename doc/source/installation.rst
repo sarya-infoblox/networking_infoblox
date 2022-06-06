@@ -167,7 +167,7 @@ To install the most recent production release, use the following command::
     $ sudo pip3 install networking-Infoblox==19.0.0
 
 .. note::
-  Infoblox strongly recommends using 19.0.0, 18.0.0, 14.0.0, 12.0.1 versions of the
+  Infoblox strongly recommends using 19.0.0, 18.0.0 versions of the
   IPAM Driver as they include critical bug fixes.
 
 Creating the Infoblox Neutron Database
